@@ -1,0 +1,66 @@
+int dr[4]={-1,1,0,0};
+int dc[4]={0,0,-1,1};
+
+
+ grid.resize(N);
+
+    dist.assign(N,vector<int>(M,-1));
+
+
+    int sr,sc,er,ec;
+
+
+    for(int i=0;i<N;i++){
+
+        cin>>grid[i];
+
+
+        for(int j=0;j<M;j++){
+
+            if(grid[i][j]=='S'){
+                sr=i;
+                sc=j;
+            }
+
+
+            if(grid[i][j]=='E'){
+                er=i;
+                ec=j;
+            }
+        }
+    }
+
+
+    queue<pair<int,int>> q;
+
+
+    q.push({sr,sc});
+    dist[sr][sc]= 0;
+
+
+
+
+
+
+
+    while(!q.empty()){
+        int tempr = q.front().first;
+        int tempc = q.front().second;
+        q.pop();
+        
+        for (int k = 0; k < 4; k ++){
+            int nr = tempr + dr[k];
+            int nc = tempc + dc[k];
+            
+            if(nr >= N || nc >= M || nr < 0|| nc < 0){
+                continue;
+            }
+            if(grid[nr][nc] == '#' || dist[nr][nc] != -1){
+                continue;
+            }
+            dist[nr][nc] = dist[tempr][tempc] + 1;
+            q.push({nr,nc});
+        }
+
+
+    }
